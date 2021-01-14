@@ -155,8 +155,8 @@
                   dense
                   :icon="mode === 'grid' ? 'list' : 'grid_on'"
                   @click="
-                    mode = mode === 'grid' ? 'list' : 'grid';
-                    separator = mode === 'grid' ? 'none' : 'horizontal';
+                    mode = mode === 'grid' ? 'list' : 'grid'
+                    separator = mode === 'grid' ? 'none' : 'horizontal'
                   "
                   v-if="!props.inFullscreen"
                 >
@@ -182,76 +182,77 @@
 </template>
 
 <script>
-import { exportFile } from "quasar";
+import { exportFile } from 'quasar'
 
-function wrapCsvValue(val, formatFn) {
-  let formatted = formatFn !== void 0 ? formatFn(val) : val;
+function wrapCsvValue (val, formatFn) {
+  let formatted
+  formatted = formatFn !== 'undefined' ? formatFn(val) : val
 
   formatted =
-    formatted === void 0 || formatted === null ? "" : String(formatted);
+    formatted === 'undefined' || formatted === null ? '' : String(formatted)
 
-  formatted = formatted.split('"').join('""');
+  formatted = formatted.split('"').join('""')
 
-  return `"${formatted}"`;
+  return `"${formatted}"`
 }
 
 export default {
-  data() {
+  data () {
     return {
-      filter: "",
-      mode: "list",
+      filter: '',
+      mode: 'list',
       deposit: {},
       pagination: {
         rowsPerPage: 10
       },
       options: [
-        "National Bank",
-        "Bank of Asia",
-        "Corporate Bank",
-        "Public Bank"
+        'National Bank',
+        'Bank of Asia',
+        'Corporate Bank',
+        'Public Bank'
       ],
       columns: [
         {
-          name: "description",
-          align: "left",
-          label: "Description",
-          field: "description",
+          name: 'description',
+          align: 'left',
+          label: 'Description',
+          field: 'description',
           sortable: true
         },
         {
-          name: "amount",
-          label: "Amount",
-          align: "left",
-          field: "amount",
+          name: 'amount',
+          label: 'Amount',
+          align: 'left',
+          field: 'amount',
           sortable: true
         }
       ],
       data: [
         {
-          description: "Invoice 10 Payment",
-          amount: "$ 200"
+          description: 'Invoice 10 Payment',
+          amount: '$ 200'
         },
         {
-          description: "Pvt Ltd Invoice",
-          amount: "$ 300"
+          description: 'Pvt Ltd Invoice',
+          amount: '$ 300'
         },
         {
-          description: "Invoice 6 Payment",
-          amount: "$ 250"
+          description: 'Invoice 6 Payment',
+          amount: '$ 250'
         },
         {
-          description: "Invoice 18 Payment",
-          amount: "$ 400"
+          description: 'Invoice 18 Payment',
+          amount: '$ 400'
         },
         {
-          description: "John and company Payment",
-          amount: "$ 500"
+          description: 'John and company Payment',
+          amount: '$ 500'
         }
       ]
-    };
+    }
   },
   methods: {
-    exportDepositsTable() {
+    exportDepositsTable () {
       // naive encoding to csv format
       const content = [this.columns.map(col => wrapCsvValue(col.label))]
         .concat(
@@ -259,50 +260,50 @@ export default {
             this.columns
               .map(col =>
                 wrapCsvValue(
-                  typeof col.field === "function"
+                  typeof col.field === 'function'
                     ? col.field(row)
-                    : row[col.field === void 0 ? col.name : col.field],
+                    : row[col.field === 'undefined' ? col.name : col.field],
                   col.format
                 )
               )
-              .join(",")
+              .join(',')
           )
         )
-        .join("\r\n");
+        .join('\r\n')
 
-      const status = exportFile("deposits.csv", content, "text/csv");
+      const status = exportFile('deposits.csv', content, 'text/csv')
 
       if (status !== true) {
         this.$q.notify({
-          message: "Browser denied file download...",
-          color: "negative",
-          icon: "warning"
-        });
+          message: 'Browser denied file download...',
+          color: 'negative',
+          icon: 'warning'
+        })
       }
     },
-    showLoading() {
+    showLoading: function () {
       this.$q.loading.show({
         message: '<b>Demo loading screen, replace your message here<b>'
       })
 
       // hiding in 2s
       this.timer = setTimeout(() => {
-        this.$q.loading.hide();
-        this.timer = void 0;
-      }, 3000);
+        this.$q.loading.hide()
+        this.timer = undefined
+      }, 3000)
     },
 
-    beforeDestroy() {
-      if (this.timer !== void 0) {
-        clearTimeout(this.timer);
-        this.$q.loading.hide();
+    beforeDestroy () {
+      if (this.timer !== 'undefined') {
+        clearTimeout(this.timer)
+        this.$q.loading.hide()
       }
     }
   },
-    beforeMount() {
-    this.showLoading();
-  },
-};
+  beforeMount () {
+    this.showLoading()
+  }
+}
 </script>
 
 <style scoped></style>

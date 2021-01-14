@@ -109,164 +109,164 @@
 </template>
 
 <script>
-    import {exportFile} from "quasar";
+import { exportFile } from 'quasar'
 
-    function wrapCsvValue(val, formatFn) {
-        let formatted = formatFn !== void 0 ? formatFn(val) : val;
+function wrapCsvValue (val, formatFn) {
+  let formatted = formatFn !== 'undefined' ? formatFn(val) : val
 
-        formatted =
-            formatted === void 0 || formatted === null ? "" : String(formatted);
+  formatted =
+            formatted === 'undefined' || formatted === null ? '' : String(formatted)
 
-        formatted = formatted.split('"').join('""');
+  formatted = formatted.split('"').join('""')
 
-        return `"${formatted}"`;
-    }
+  return `"${formatted}"`
+}
 
-    export default {
-        data() {
-            return {
-                filter: "",
-                mode: "list",
-                invoice: {},
-                employee_dialog: false,
-                columns: [
-                    {
-                        name: "serial_no",
-                        align: "left",
-                        label: "Serial No.",
-                        field: "serial_no",
-                        sortable: true
-                    },
-                    {
-                        name: "emp_id",
-                        required: true,
-                        label: "Employee Id",
-                        align: "left",
-                        field: "emp_id",
-                        sortable: true
-                    },
-                    {
-                        name: "name",
-                        align: "left",
-                        label: "Employee Name",
-                        field: "name",
-                        sortable: true
-                    },
-                    {
-                        name: "salary_type",
-                        align: "left",
-                        label: "Salary Type",
-                        field: "salary_type",
-                        sortable: true
-                    },
-                    {
-                        name: "basic_salary",
-                        align: "left",
-                        label: "Basic salary",
-                        field: "basic_salary",
-                        sortable: true
-                    },
-                    {
-                        name: "overtime",
-                        align: "left",
-                        label: "Overtime",
-                        field: "overtime",
-                        sortable: true
-                    },
-                    {
-                        name: "detail",
-                        align: "left",
-                        label: "Detail",
-                        field: "detail",
-                        sortable: true
-                    },
-                    {
-                        name: "action",
-                        align: "left",
-                        label: "Action",
-                        field: "action",
-                        sortable: true
-                    }
-                ],
-                data: [
-                    {
-                        serial_no: "01",
-                        emp_id: "Emp 233",
-                        name: "Leslie Tecklenburg",
-                        basic_salary: "$ 4200",
-                        salary_type: "Basic",
-                        overtime: "$ 20",
-                    },
-                    {
-                        serial_no: "02",
-                        emp_id: "Emp 104",
-                        name: "Lia Whitledge",
-                        basic_salary: "$ 2550",
-                        salary_type: "Basic",
-                        overtime: "$ 40",
-                    },
-                    {
-                        serial_no: "03",
-                        emp_id: "Emp 345",
-                        name: "Sam Wileman",
-                        basic_salary: "$ 3800",
-                        salary_type: "Basic",
-                        overtime: "$ 90",
-                    },
-                    {
-                        serial_no: "04",
-                        emp_id: "Emp 345",
-                        name: "Edgar Colmer",
-                        basic_salary: "$ 4000",
-                        salary_type: "Basic",
-                        overtime: "$ 56",
-                    },
-                    {
-                        serial_no: "05",
-                        emp_id: "Emp 895",
-                        name: "Kaiden Rozelle",
-                        basic_salary: "$ 3200",
-                        salary_type: "Basic",
-                        overtime: "$ 23",
-                    }
-                ],
-                pagination: {
-                    rowsPerPage: 10
-                }
-            };
+export default {
+  data () {
+    return {
+      filter: '',
+      mode: 'list',
+      invoice: {},
+      employee_dialog: false,
+      columns: [
+        {
+          name: 'serial_no',
+          align: 'left',
+          label: 'Serial No.',
+          field: 'serial_no',
+          sortable: true
         },
-        methods: {
-            exportTable() {
-                // naive encoding to csv format
-                const content = [this.columns.map(col => wrapCsvValue(col.label))]
-                    .concat(
-                        this.data.map(row =>
-                            this.columns
-                                .map(col =>
-                                    wrapCsvValue(
-                                        typeof col.field === "function"
-                                            ? col.field(row)
-                                            : row[col.field === void 0 ? col.name : col.field],
-                                        col.format
-                                    )
-                                )
-                                .join(",")
-                        )
-                    )
-                    .join("\r\n");
-
-                const status = exportFile("employee_salary_list.csv", content, "text/csv");
-
-                if (status !== true) {
-                    this.$q.notify({
-                        message: "Browser denied file download...",
-                        color: "negative",
-                        icon: "warning"
-                    });
-                }
-            }
+        {
+          name: 'emp_id',
+          required: true,
+          label: 'Employee Id',
+          align: 'left',
+          field: 'emp_id',
+          sortable: true
+        },
+        {
+          name: 'name',
+          align: 'left',
+          label: 'Employee Name',
+          field: 'name',
+          sortable: true
+        },
+        {
+          name: 'salary_type',
+          align: 'left',
+          label: 'Salary Type',
+          field: 'salary_type',
+          sortable: true
+        },
+        {
+          name: 'basic_salary',
+          align: 'left',
+          label: 'Basic salary',
+          field: 'basic_salary',
+          sortable: true
+        },
+        {
+          name: 'overtime',
+          align: 'left',
+          label: 'Overtime',
+          field: 'overtime',
+          sortable: true
+        },
+        {
+          name: 'detail',
+          align: 'left',
+          label: 'Detail',
+          field: 'detail',
+          sortable: true
+        },
+        {
+          name: 'action',
+          align: 'left',
+          label: 'Action',
+          field: 'action',
+          sortable: true
         }
-    };
+      ],
+      data: [
+        {
+          serial_no: '01',
+          emp_id: 'Emp 233',
+          name: 'Leslie Tecklenburg',
+          basic_salary: '$ 4200',
+          salary_type: 'Basic',
+          overtime: '$ 20'
+        },
+        {
+          serial_no: '02',
+          emp_id: 'Emp 104',
+          name: 'Lia Whitledge',
+          basic_salary: '$ 2550',
+          salary_type: 'Basic',
+          overtime: '$ 40'
+        },
+        {
+          serial_no: '03',
+          emp_id: 'Emp 345',
+          name: 'Sam Wileman',
+          basic_salary: '$ 3800',
+          salary_type: 'Basic',
+          overtime: '$ 90'
+        },
+        {
+          serial_no: '04',
+          emp_id: 'Emp 345',
+          name: 'Edgar Colmer',
+          basic_salary: '$ 4000',
+          salary_type: 'Basic',
+          overtime: '$ 56'
+        },
+        {
+          serial_no: '05',
+          emp_id: 'Emp 895',
+          name: 'Kaiden Rozelle',
+          basic_salary: '$ 3200',
+          salary_type: 'Basic',
+          overtime: '$ 23'
+        }
+      ],
+      pagination: {
+        rowsPerPage: 10
+      }
+    }
+  },
+  methods: {
+    exportTable () {
+      // naive encoding to csv format
+      const content = [this.columns.map(col => wrapCsvValue(col.label))]
+        .concat(
+          this.data.map(row =>
+            this.columns
+              .map(col =>
+                wrapCsvValue(
+                  typeof col.field === 'function'
+                    ? col.field(row)
+                    : row[col.field === 'undefined' ? col.name : col.field],
+                  col.format
+                )
+              )
+              .join(',')
+          )
+        )
+        .join('\r\n')
+
+      const status = exportFile('employee_salary_list.csv', content, 'text/csv')
+
+      if (status !== true) {
+        this.$q.notify({
+          message: 'Browser denied file download...',
+          color: 'negative',
+          icon: 'warning'
+        })
+      }
+    }
+  }
+}
 </script>
 <style>
   .q-chip__content {

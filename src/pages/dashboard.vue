@@ -216,387 +216,387 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import IEcharts from 'vue-echarts-v3/src/full.js';
-    import {exportFile} from 'quasar';
+import Vue from 'vue'
+import IEcharts from 'vue-echarts-v3/src/full.js'
+import { exportFile } from 'quasar'
 
-    Vue.component('IEcharts', IEcharts);
+Vue.component('IEcharts', IEcharts)
 
-    function wrapCsvValue(val, formatFn) {
-        let formatted = formatFn !== void 0
-            ? formatFn(val)
-            : val
+function wrapCsvValue (val, formatFn) {
+  let formatted = formatFn !== 'undefined'
+    ? formatFn(val)
+    : val
 
-        formatted = formatted === void 0 || formatted === null
-            ? ''
-            : String(formatted)
+  formatted = formatted === 'undefined' || formatted === null
+    ? ''
+    : String(formatted)
 
-        formatted = formatted.split('"').join('""')
+  formatted = formatted.split('"').join('""')
 
-        return `"${formatted}"`
-    }
+  return `"${formatted}"`
+}
 
-    export default {
-        data() {
-            return {
-                filter: '',
-                mode: 'list',
+export default {
+  data () {
+    return {
+      filter: '',
+      mode: 'list',
 
-                gaugeOptions: {
-                    tooltip: {
-                        formatter: '{a} <br/>{b} : {c}%'
-                    },
-                    series: [
-                        {
-                            type: 'gauge',
-                            name: "Sale",
-                            detail: {formatter: '{value}%'},
-                            data: [{value: 30}],
-                            min: 0,
-                            radius: '100%',
-                            axisLine: {
-                                show: true,
-                                lineStyle: {
-                                    color: [[0.35, '#293c55'], [0.65, '#61a0a8'], [1, '#c23731']],
-                                    width: 20
-                                },
-                            },
-
-                        }
-                    ]
-                },
-                columns: [
-                    {name: 'activity_id', align: 'left', label: 'Activity ID', field: 'activity_id', sortable: true},
-                    {
-                        name: 'desc',
-                        required: true,
-                        label: 'Activity Name',
-                        align: 'left',
-                        field: row => row.name,
-                        sortable: true
-                    },
-                    {name: 'regarding', align: 'left', label: 'Regarding', field: 'regarding', sortable: true},
-                    {name: 'owner', align: 'left', label: 'Owner', field: 'owner', sortable: true},
-                    {
-                        name: 'creation_date',
-                        align: 'left',
-                        label: 'Creation Date',
-                        field: 'creation_date',
-                        sortable: true
-                    }
-                ],
-                data: [
-                    {
-                        activity_id: "C001",
-                        name: 'Advanced communications',
-                        regarding: 'Presentation',
-                        owner: 'John',
-                        creation_date: '12-09-2019'
-                    },
-                    {
-                        activity_id: "C002",
-                        name: 'New drug discussion',
-                        regarding: 'Meeting',
-                        owner: 'John',
-                        creation_date: '09-02-2019'
-                    },
-                    {
-                        activity_id: "C003",
-                        name: 'Universal services discussion',
-                        regarding: 'Meeting',
-                        owner: 'John',
-                        creation_date: '03-25-2019'
-                    },
-                    {
-                        activity_id: "C004",
-                        name: 'Add on business',
-                        regarding: 'Business',
-                        owner: 'John',
-                        creation_date: '03-18-2019'
-                    },
-                    {
-                        activity_id: "C005",
-                        name: 'Promotional Activity',
-                        regarding: 'Personal',
-                        owner: 'John',
-                        creation_date: '04-09-2019'
-                    },
-                ],
-                pagination: {
-                    rowsPerPage: 10
-                }
-            }
+      gaugeOptions: {
+        tooltip: {
+          formatter: '{a} <br/>{b} : {c}%'
         },
-        computed: {
-            barOptions() {
-                return {
-                    grid: {
-                        bottom: '20%',
-                        left: '15%',
-                        top: '3%'
-                    },
-                    legend: {
-                        bottom: 0,
-                        textStyle: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    tooltip: {},
-                    dataset: {
-                        dimensions: ['time_period', 'sale', 'goal'],
-                        source: [
-                            {time_period: 'Jan 2019', sale: 50, goal: 70},
-                            {time_period: 'Feb 2019', sale: 80, goal: 75},
-                            {time_period: 'Mar 2019', sale: 86, goal: 80},
-                            {time_period: 'Apr 2019', sale: 72, goal: 85}
-                        ]
-                    },
-                    xAxis: {
-                        type: 'category',
-                        // axisLabel: {
-                        //     rotate: 45
-                        // }
-                        axisLabel: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    yAxis: {
-                        // name: 'Goal',
-                        // nameLocation: 'center',
-                        // nameGap: 30,
-                        // nameTextStyle:{
-                        //     fontWeight: 'bold'
-                        // }
-                        axisLabel: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    series: [
-                        {type: 'bar', name: 'Sales'},
-                        {type: 'bar', name: 'Goals'}
-                    ]
-                }
+        series: [
+          {
+            type: 'gauge',
+            name: 'Sale',
+            detail: { formatter: '{value}%' },
+            data: [{ value: 30 }],
+            min: 0,
+            radius: '100%',
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: [[0.35, '#293c55'], [0.65, '#61a0a8'], [1, '#c23731']],
+                width: 20
+              }
+            }
+
+          }
+        ]
+      },
+      columns: [
+        { name: 'activity_id', align: 'left', label: 'Activity ID', field: 'activity_id', sortable: true },
+        {
+          name: 'desc',
+          required: true,
+          label: 'Activity Name',
+          align: 'left',
+          field: row => row.name,
+          sortable: true
+        },
+        { name: 'regarding', align: 'left', label: 'Regarding', field: 'regarding', sortable: true },
+        { name: 'owner', align: 'left', label: 'Owner', field: 'owner', sortable: true },
+        {
+          name: 'creation_date',
+          align: 'left',
+          label: 'Creation Date',
+          field: 'creation_date',
+          sortable: true
+        }
+      ],
+      data: [
+        {
+          activity_id: 'C001',
+          name: 'Advanced communications',
+          regarding: 'Presentation',
+          owner: 'John',
+          creation_date: '12-09-2019'
+        },
+        {
+          activity_id: 'C002',
+          name: 'New drug discussion',
+          regarding: 'Meeting',
+          owner: 'John',
+          creation_date: '09-02-2019'
+        },
+        {
+          activity_id: 'C003',
+          name: 'Universal services discussion',
+          regarding: 'Meeting',
+          owner: 'John',
+          creation_date: '03-25-2019'
+        },
+        {
+          activity_id: 'C004',
+          name: 'Add on business',
+          regarding: 'Business',
+          owner: 'John',
+          creation_date: '03-18-2019'
+        },
+        {
+          activity_id: 'C005',
+          name: 'Promotional Activity',
+          regarding: 'Personal',
+          owner: 'John',
+          creation_date: '04-09-2019'
+        }
+      ],
+      pagination: {
+        rowsPerPage: 10
+      }
+    }
+  },
+  computed: {
+    barOptions () {
+      return {
+        grid: {
+          bottom: '20%',
+          left: '15%',
+          top: '3%'
+        },
+        legend: {
+          bottom: 0,
+          textStyle: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        tooltip: {},
+        dataset: {
+          dimensions: ['time_period', 'sale', 'goal'],
+          source: [
+            { time_period: 'Jan 2019', sale: 50, goal: 70 },
+            { time_period: 'Feb 2019', sale: 80, goal: 75 },
+            { time_period: 'Mar 2019', sale: 86, goal: 80 },
+            { time_period: 'Apr 2019', sale: 72, goal: 85 }
+          ]
+        },
+        xAxis: {
+          type: 'category',
+          // axisLabel: {
+          //     rotate: 45
+          // }
+          axisLabel: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        yAxis: {
+          // name: 'Goal',
+          // nameLocation: 'center',
+          // nameGap: 30,
+          // nameTextStyle:{
+          //     fontWeight: 'bold'
+          // }
+          axisLabel: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        series: [
+          { type: 'bar', name: 'Sales' },
+          { type: 'bar', name: 'Goals' }
+        ]
+      }
+    },
+    lineChartOption () {
+      return {
+        grid: {
+          bottom: '20%',
+          left: '15%',
+          top: '3%'
+        },
+        legend: {
+          bottom: 0,
+          textStyle: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        tooltip: {
+          // formatter:
+          //     function (param) {
+          //     console.log(param)
+          //     // return param.seriesName + '<br />' + param.name + ': ';
+          // }
+        },
+        dataset: {
+          dimensions: ['product_name', 'share', 'growth'],
+          source: [
+            { product_name: 'Product A', share: 20, growth: 25 },
+            { product_name: 'Product B', share: 22, growth: 18 },
+            { product_name: 'Product C', share: 40, growth: 45 }
+          ]
+        },
+        xAxis: {
+          type: 'category',
+          // axisLabel: {
+          //     rotate: 45
+          // }
+          axisLabel: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        yAxis: {
+          axisLabel: {
+            formatter: function (value, index) {
+              return value + ' %'
             },
-            lineChartOption() {
-                return {
-                    grid: {
-                        bottom: '20%',
-                        left: '15%',
-                        top: '3%'
-                    },
-                    legend: {
-                        bottom: 0,
-                        textStyle: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    tooltip: {
-                        // formatter:
-                        //     function (param) {
-                        //     console.log(param)
-                        //     // return param.seriesName + '<br />' + param.name + ': ';
-                        // }
-                    },
-                    dataset: {
-                        dimensions: ['product_name', 'share', 'growth'],
-                        source: [
-                            {product_name: 'Product A', share: 20, growth: 25},
-                            {product_name: 'Product B', share: 22, growth: 18},
-                            {product_name: 'Product C', share: 40, growth: 45}
-                        ]
-                    },
-                    xAxis: {
-                        type: 'category',
-                        // axisLabel: {
-                        //     rotate: 45
-                        // }
-                        axisLabel: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    yAxis: {
-                        axisLabel: {
-                            formatter: function (value, index) {
-                                return value + ' %'
-                            },
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    series: [
-                        {type: 'line', name: 'Share'},
-                        {type: 'line', name: 'Growth'}
-                    ]
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        series: [
+          { type: 'line', name: 'Share' },
+          { type: 'line', name: 'Growth' }
+        ]
+      }
+    },
+    pieOptions () {
+      return {
+        tooltip: {
+          show: true
+        },
+        legend: {
+          orient: 'horizontal',
+          bottom: 0,
+          width: 300,
+          textStyle: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        series: [
+          {
+            name: 'Competitor',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                show: true,
+                position: 'inner',
+                formatter: function (param, index) {
+                  return param.value + ' %'
                 }
-            },
-            pieOptions() {
-                return {
-                    tooltip: {
-                        show: true
-                    },
-                    legend: {
-                        orient: 'horizontal',
-                        bottom: 0,
-                        width: 300,
-                        textStyle: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    series: [
-                        {
-                            name: 'Competitor',
-                            type: 'pie',
-                            radius: ['40%', '70%'],
-                            avoidLabelOverlap: false,
-                            label: {
-                                normal: {
-                                    show: true,
-                                    position: 'inner',
-                                    formatter: function (param, index) {
-                                        return param.value + ' %'
-                                    }
-                                },
-                                emphasis: {
-                                    show: true,
-                                    textStyle: {
-                                        fontSize: '20',
-                                        fontWeight: 'bold'
-                                    }
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            selectedMode: 'single',
-                            data: [
-                                {value: 40, name: 'Product 1', selected: true},
-                                {value: 20, name: 'Competitor 1', selected: false},
-                                {value: 15, name: 'Competitor 2', selected: false},
-                                {value: 25, name: 'Competitor 3', selected: false},
-                            ]
-                        }
-                    ]
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: '20',
+                  fontWeight: 'bold'
                 }
+              }
             },
-            stackedBarOptions() {
-                return {
-                    tooltip: {
-                        trigger: 'axis',
-                        axisPointer:
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            selectedMode: 'single',
+            data: [
+              { value: 40, name: 'Product 1', selected: true },
+              { value: 20, name: 'Competitor 1', selected: false },
+              { value: 15, name: 'Competitor 2', selected: false },
+              { value: 25, name: 'Competitor 3', selected: false }
+            ]
+          }
+        ]
+      }
+    },
+    stackedBarOptions () {
+      return {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer:
                             {
-                                type: 'shadow'
+                              type: 'shadow'
                             },
-                        backgroundColor: 'rgba(50,50,50,0.9)',
+          backgroundColor: 'rgba(50,50,50,0.9)'
 
-                    },
-                    legend: {
-                        bottom: 0,
-                        textStyle: {
-                            color: this.$q.dark.isActive ? 'white' : '#676767'
-                        }
-                    },
-                    color: ['#3395dd', '#ed892d', '#34393b'],
-                    // legend: {
-                    //     y: "bottom",
-                    //     data: [{name: 'Territory Sales', icon: 'circle'}, {
-                    //         name: 'Remaining Nation Sales',
-                    //         icon: 'circle'
-                    //     }]
-                    // },
-                    grid:
+        },
+        legend: {
+          bottom: 0,
+          textStyle: {
+            color: this.$q.dark.isActive ? 'white' : '#676767'
+          }
+        },
+        color: ['#3395dd', '#ed892d', '#34393b'],
+        // legend: {
+        //     y: "bottom",
+        //     data: [{name: 'Territory Sales', icon: 'circle'}, {
+        //         name: 'Remaining Nation Sales',
+        //         icon: 'circle'
+        //     }]
+        // },
+        grid:
                         {
-                            bottom: '10%',
-                            left: '15%',
-                            top: '9%'
+                          bottom: '10%',
+                          left: '15%',
+                          top: '9%'
                         },
-                    calculable: true,
-                    xAxis:
+        calculable: true,
+        xAxis:
                         {
-                            type: 'value',
-                            position:
+                          type: 'value',
+                          position:
                                 'top',
-                            axisLine:
+                          axisLine:
                                 {
-                                    show: false
+                                  show: false
                                 },
-                            axisLabel: {
-                                formatter: function (value, index) {
-                                    return '$' + value;
-                                },
-                                color: this.$q.dark.isActive ? 'white' : '#676767'
-                            }
+                          axisLabel: {
+                            formatter: function (value, index) {
+                              return '$' + value
+                            },
+                            color: this.$q.dark.isActive ? 'white' : '#676767'
+                          }
                         },
-                    yAxis: [
-                        {
-                            type: 'category',
-                            data: ['Alex Morrow', 'Joanna Carter', 'Jimmy Joanna', 'Mack Hales'],
-                            axisLabel: {
-                                fontSize: 12,
-                                color: this.$q.dark.isActive ? 'white' : '#676767'
-                            }
-                        }
-                    ],
-                    series:
+        yAxis: [
+          {
+            type: 'category',
+            data: ['Alex Morrow', 'Joanna Carter', 'Jimmy Joanna', 'Mack Hales'],
+            axisLabel: {
+              fontSize: 12,
+              color: this.$q.dark.isActive ? 'white' : '#676767'
+            }
+          }
+        ],
+        series:
                         [{
-                            name: 'Qualification',
-                            type: 'bar',
-                            stack: 'A',
-                            data: [300, 350, 400, 500]
+                          name: 'Qualification',
+                          type: 'bar',
+                          stack: 'A',
+                          data: [300, 350, 400, 500]
 
                         }, {
-                            name: 'Discovery',
-                            type: 'bar',
-                            stack: 'A',
-                            data: [100, 180, 250, 300]
+                          name: 'Discovery',
+                          type: 'bar',
+                          stack: 'A',
+                          data: [100, 180, 250, 300]
 
                         }, {
-                            name: 'Quote',
-                            type: 'bar',
-                            stack: 'A',
-                            data: [100, 120, 200, 220]
+                          name: 'Quote',
+                          type: 'bar',
+                          stack: 'A',
+                          data: [100, 120, 200, 220]
 
                         }]
-                }
-            }
-        },
-        methods: {
-            SaveImage(type) {
-                const linkSource = this.$refs[type].getDataURL();
-                const downloadLink = document.createElement('a');
-                document.body.appendChild(downloadLink);
-                downloadLink.href = linkSource;
-                downloadLink.target = '_self';
-                downloadLink.download = type + '.png';
-                downloadLink.click();
-            },
-            exportTable() {
-                // naive encoding to csv format
-                const content = [this.columns.map(col => wrapCsvValue(col.label))].concat(
-                    this.data.map(row => this.columns.map(col => wrapCsvValue(
-                        typeof col.field === 'function'
-                            ? col.field(row)
-                            : row[col.field === void 0 ? col.name : col.field],
-                        col.format
-                    )).join(','))
-                ).join('\r\n')
-
-                const status = exportFile(
-                    'activity.csv',
-                    content,
-                    'text/csv'
-                )
-
-                if (status !== true) {
-                    this.$q.notify({
-                        message: 'Browser denied file download...',
-                        color: 'negative',
-                        icon: 'warning'
-                    })
-                }
-            }
-        }
+      }
     }
+  },
+  methods: {
+    SaveImage (type) {
+      const linkSource = this.$refs[type].getDataURL()
+      const downloadLink = document.createElement('a')
+      document.body.appendChild(downloadLink)
+      downloadLink.href = linkSource
+      downloadLink.target = '_self'
+      downloadLink.download = type + '.png'
+      downloadLink.click()
+    },
+    exportTable () {
+      // naive encoding to csv format
+      const content = [this.columns.map(col => wrapCsvValue(col.label))].concat(
+        this.data.map(row => this.columns.map(col => wrapCsvValue(
+          typeof col.field === 'function'
+            ? col.field(row)
+            : row[col.field === 'undefined' ? col.name : col.field],
+          col.format
+        )).join(','))
+      ).join('\r\n')
+
+      const status = exportFile(
+        'activity.csv',
+        content,
+        'text/csv'
+      )
+
+      if (status !== true) {
+        this.$q.notify({
+          message: 'Browser denied file download...',
+          color: 'negative',
+          icon: 'warning'
+        })
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -119,92 +119,92 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                columns: [
-                    {
-                        name: "serial_no",
-                        align: "left",
-                        label: "Serial No.",
-                        field: "serial_no",
-                        sortable: true
-                    },
-                    {
-                        name: "designation",
-                        align: "left",
-                        label: "Designation",
-                        field: "designation",
-                        sortable: true
-                    },
-                    {
-                        name: "action",
-                        align: "left",
-                        label: "Action",
-                        field: "action",
-                        sortable: true
-                    }
-                ],
-                finance_data: [
-                    {
-                        serial_no: "01",
-                        designation: "Admin",
-                    },
-                    {
-                        serial_no: "02",
-                        designation: "Staff",
-                    },
-                    {
-                        serial_no: "03",
-                        designation: "Admin",
-                    }
-                ],
-                account_data: [
-                    {
-                        serial_no: "01",
-                        designation: "Senior Account",
-                    },
-                    {
-                        serial_no: "02",
-                        designation: "Manager Account",
-                    },
-                    {
-                        serial_no: "03",
-                        designation: "Manager",
-                    }
-                ],
-                hr_data: [
-                    {
-                        serial_no: "01",
-                        designation: "Manager",
-                    },
-                    {
-                        serial_no: "02",
-                        designation: "Department Head",
-                    },
-                    {
-                        serial_no: "03",
-                        designation: "assistant",
-                    }
-                ],
-                it_data: [
-                    {
-                        serial_no: "01",
-                        designation: "Software developer",
-                    },
-                    {
-                        serial_no: "02",
-                        designation: "Grapics designer",
-                    },
-                    {
-                        serial_no: "03",
-                        designation: "Tester",
-                    }
-                ],
-                pagination: {
-                    rowsPerPage: 5
-                }
-            }
+export default {
+  data () {
+    return {
+      columns: [
+        {
+          name: 'serial_no',
+          align: 'left',
+          label: 'Serial No.',
+          field: 'serial_no',
+          sortable: true
+        },
+        {
+          name: 'designation',
+          align: 'left',
+          label: 'Designation',
+          field: 'designation',
+          sortable: true
+        },
+        {
+          name: 'action',
+          align: 'left',
+          label: 'Action',
+          field: 'action',
+          sortable: true
         }
+      ],
+      finance_data: [
+        {
+          serial_no: '01',
+          designation: 'Admin'
+        },
+        {
+          serial_no: '02',
+          designation: 'Staff'
+        },
+        {
+          serial_no: '03',
+          designation: 'Admin'
+        }
+      ],
+      account_data: [
+        {
+          serial_no: '01',
+          designation: 'Senior Account'
+        },
+        {
+          serial_no: '02',
+          designation: 'Manager Account'
+        },
+        {
+          serial_no: '03',
+          designation: 'Manager'
+        }
+      ],
+      hr_data: [
+        {
+          serial_no: '01',
+          designation: 'Manager'
+        },
+        {
+          serial_no: '02',
+          designation: 'Department Head'
+        },
+        {
+          serial_no: '03',
+          designation: 'assistant'
+        }
+      ],
+      it_data: [
+        {
+          serial_no: '01',
+          designation: 'Software developer'
+        },
+        {
+          serial_no: '02',
+          designation: 'Grapics designer'
+        },
+        {
+          serial_no: '03',
+          designation: 'Tester'
+        }
+      ],
+      pagination: {
+        rowsPerPage: 5
+      }
     }
+  }
+}
 </script>

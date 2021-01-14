@@ -283,19 +283,19 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       left: false
-    };
+    }
   },
   methods: {
-    logoutNotify() {
+    logoutNotify () {
       this.$q.notify({
-        message: "Logged out"
-      });
+        message: 'Logged out'
+      })
     }
   }
-};
+}
 </script>
 
 <style>

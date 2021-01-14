@@ -80,19 +80,19 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                user: {
-                    first_name: 'Mayank',
-                    last_name: 'Patel',
-                    age: 30,
-                    email: 'm******@****.com',
-                    phone: '98******23'
-                },
-            }
-        },
+export default {
+  data () {
+    return {
+      user: {
+        first_name: 'Mayank',
+        last_name: 'Patel',
+        age: 30,
+        email: 'm******@****.com',
+        phone: '98******23'
+      }
     }
+  }
+}
 </script>
 
 <style scoped>

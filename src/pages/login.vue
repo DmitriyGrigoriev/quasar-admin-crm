@@ -76,7 +76,6 @@
 <script type="text/javascript"></script>
 <script>
 
-
     export default {
         data() {
             return {
